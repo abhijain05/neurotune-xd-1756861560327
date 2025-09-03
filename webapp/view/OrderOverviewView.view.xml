@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mvc:View xmlns:mvc="sap.ui.core.mvc"
+  xmlns="sap.m"
+  xmlns:layout="sap.ui.layout"
+  xmlns:form="sap.ui.layout.form"
+  xmlns:core="sap.ui.core"
+  xmlns:richtexteditor="sap.ui.richtexteditor"
+  xmlns:viz="sap.viz.ui5"
+  controllerName="preview.app.controller.OrderOverviewView"
+  displayBlock="true">
+  <Page title="OrderOverviewView" enableScrolling="true">
+    <content>
+      <Title id="title_si1xlk0e" text="SAPUI5 App"/>
+      <layout:Grid id="mainLayout" width="100%"/>
+    </content>
+  </Page>
+</mvc:View>

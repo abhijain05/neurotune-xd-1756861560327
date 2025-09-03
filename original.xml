@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebDynpro xmlns="http://www.sap.com/wd/webdynpro">
+  <View name="OrderOverviewView">
+    <Title>SAPUI5 App</Title>
+    <MatrixLayout id="mainLayout" cellPadding="0" cellSpacing="0" width="100%">
+      <!-- Search Section -->
+      <MatrixRow id="searchRow">
+        <MatrixCell colSpan="2">
+          <FlowLayout id="searchFlowLayout">
+            <InputField id="searchInput" value="{/SearchQuery}" width="300px" placeholder="Search"/>
+            <Button id="goButton" text="Go" onAction="onActionGo"/>
+          </FlowLayout>
+        </MatrixCell>
+      </MatrixRow>
+
+      <!-- Filter Section Header -->
+      <MatrixRow id="filterTitleRow">
+        <MatrixCell colSpan="2">
+          <TextView id="filterTitle" text="Filter" design="Header2"/>
+        </MatrixCell>
+      </MatrixRow>
+
+      <!-- Filter - Status Dropdown -->
+      <MatrixRow id="filterStatusRow">
+        <MatrixCell>
+          <Label id="statusLabel" text="Status" labelFor="statusDropdown"/>
+        </MatrixCell>
+        <MatrixCell>
+          <DropDownByKey id="statusDropdown" selectedKey="{/SelectedStatusKey}" value="{/SelectedStatusText}" onSelect="onActionStatusChange">
+            <Items>
+              <CollectionDataSource id="statusOptionsDataSource" node="StatusOptions">
+                <ItemTemplate>
+                  <DropDownByKeyItem key="{key}" value="{value}"/>
+                </ItemTemplate>
+              </CollectionDataSource>
+            </Items>
+          </DropDownByKey>
+        </MatrixCell>
+      </MatrixRow>
+
+      <!-- Orders Table Section -->
+      <MatrixRow id="tableRow">
+        <MatrixCell colSpan="2">
+          <Table id="ordersTable" dataSource="Orders" navigationMode="Scrollable" visibleRowCount="4">
+            <Columns>
+              <Column id="colOrderID" width="100px" headerVisible="true">
+                <TextView id="colOrderIDHeader" text="Order ID"/>
+              </Column>
+              <Column id="colProduct" width="150px" headerVisible="true">
+                <TextView id="colProductHeader" text="Product"/>
+              </Column>
+              <Column id="colStatus" width="120px" headerVisible="true">
+                <TextView id="colStatusHeader" text="Status"/>
+              </Column>
+              <Column id="colAmount" width="100px" headerVisible="true">
+                <TextView id="colAmountHeader" text="Amount"/>
+              </Column>
+            </Columns>
+            <TableRows>
+              <CollectionDataSource id="ordersDataSource" node="Orders"/>
+              <TableRowTemplate>
+                <TextView id="orderIDCell" text="{Order_ID}"/>
+                <TextView id="productCell" text="{Product_Name}"/>
+                <TextView id="statusCell" text="{Order_Status}"/>
+                <TextView id="amountCell" text="{Order_Currency} {Order_Amount}"/>
+              </TableRowTemplate>
+            </TableRows>
+          </Table>
+        </MatrixCell>
+      </MatrixRow>
+    </MatrixLayout>
+  </View>
+  <Controller name="OrderOverviewViewController">
+    <Methods>
+      <Method name="onActionGo">
+        <Description>Handles the action when the 'Go' button is pressed for search.</Description>
+        <Parameters/>
+        <body>
+          <![CDATA[
+            // Retrieve the search query from the context element.
+            // String searchQuery = wdContext.currentContextElement().getSearchQuery();
+
+            // Example: Invalidate the 'Orders' node to trigger data re-fetching or filtering
+            // based on the search query.
+            // wdContext.nodeOrders().invalidate();
+            // wdComponentAPI.getMessageManager().reportSuccess("Search performed for: " + searchQuery);
+          ]]>
+        </body>
+      </Method>
+      <Method name="onActionStatusChange">
+        <Description>Handles the action when the status filter dropdown selection changes.</Description>
+        <Parameters/>
+        <body>
+          <![CDATA[
+            // Retrieve the selected status key and text from the context element.
+            // String selectedStatusKey = wdContext.currentContextElement().getSelectedStatusKey();
+            // String selectedStatusText = wdContext.currentContextElement().getSelectedStatusText();
+
+            // Example: Invalidate the 'Orders' node to trigger data re-fetching or filtering
+            // based on the selected status.
+            // wdContext.nodeOrders().invalidate();
+            // wdComponentAPI.getMessageManager().reportInformation("Status filter changed to: " + selectedStatusText);
+          ]]>
+        </body>
+      </Method>
+    </Methods>
+  </Controller>
+</WebDynpro>
