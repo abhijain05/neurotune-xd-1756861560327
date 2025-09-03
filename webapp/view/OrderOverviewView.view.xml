@@ -1,17 +1,66 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<mvc:View xmlns:mvc="sap.ui.core.mvc"
-  xmlns="sap.m"
-  xmlns:layout="sap.ui.layout"
-  xmlns:form="sap.ui.layout.form"
-  xmlns:core="sap.ui.core"
-  xmlns:richtexteditor="sap.ui.richtexteditor"
-  xmlns:viz="sap.viz.ui5"
-  controllerName="preview.app.controller.OrderOverviewView"
-  displayBlock="true">
-  <Page title="OrderOverviewView" enableScrolling="true">
-    <content>
-      <Title id="title_si1xlk0e" text="SAPUI5 App"/>
-      <layout:Grid id="mainLayout" width="100%"/>
-    </content>
-  </Page>
+<mvc:View
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns="sap.m"
+	xmlns:layout="sap.ui.layout"
+	controllerName="converted.orderoverviewview.controller.OrderOverviewView"
+	displayBlock="true"
+          xmlns:commons="sap.ui.commons"
+          xmlns:core="sap.ui.core">
+	<Page title="Order Overview" enableScrolling="true">
+		<content>
+			<VBox>
+				<Title text="SAPUI5 App" level="H1" />
+				<HBox justifyContent="SpaceBetween">
+					<Input id="searchInput" placeholder="Search" liveChange="onSearch" width="300px" />
+					<Button id="exportButton" text="Export to CSV" press="onExportToCSV" />
+				</HBox>
+				<Text text="Filter" style="font-weight:bold; margin-top: 1rem;" />
+				<HBox>
+					<Label text="Status: " />
+					<Select id="statusDropdown" >
+						<items>
+							<core:Item key="Open" text="Open" />
+							<core:Item key="In Progress" text="In Progress" />
+							<core:Item key="Shipped" text="Shipped" />
+							<core:Item key="Completed" text="Completed"/>
+						</items>
+					</Select>
+				</HBox>
+				<Table id="ordersTable" items="{orders>/Orders}">
+					<columns>
+						<Column>
+							<header>
+								<Text text="Order ID" />
+							</header>
+						</Column>
+						<Column>
+							<header>
+								<Text text="Product" />
+							</header>
+						</Column>
+						<Column>
+							<header>
+								<Text text="Status" />
+							</header>
+						</Column>
+						<Column>
+							<header>
+								<Text text="Amount" />
+							</header>
+						</Column>
+					</columns>
+					<items>
+						<ColumnListItem>
+							<cells>
+								<Text text="{OrderID}" />
+								<Text text="{Product}" />
+								<Text text="{Status}" />
+								<Text text="{= ${Amount} > 0 ? '€ ' + ${Amount}.toFixed(2) : ''}" />
+							</cells>
+						</ColumnListItem>
+					</items>
+				</Table>
+			</VBox>
+		</content>
+	</Page>
 </mvc:View>

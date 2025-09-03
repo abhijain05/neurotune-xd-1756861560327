@@ -62,36 +62,16 @@
       },
       "routes": [
         {
-          "name": "main",
+          "name": "RouteMain",
           "pattern": "",
           "target": [
             "main"
-          ]
-        },
-        {
-          "name": "first",
-          "pattern": "first",
-          "target": [
-            "main"
-          ]
-        },
-        {
-          "name": "second",
-          "pattern": "second",
-          "target": [
-            "second"
           ]
         }
       ],
       "targets": {
         "main": {
           "viewName": "OrderOverviewView",
-          "viewLevel": 1,
-          "controlId": "app",
-          "controlAggregation": "pages"
-        },
-        "second": {
-          "viewName": "SecondView",
           "viewLevel": 1,
           "controlId": "app",
           "controlAggregation": "pages"
